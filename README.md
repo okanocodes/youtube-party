@@ -104,7 +104,7 @@ pnpm preview
 ## Features
 
 - Create and join rooms to watch YouTube videos together
-- Real-time chat and playlist updates via Socket.IO
+- Real-time synchronization
 - Host controls for managing the room and playlist
 
 ---
