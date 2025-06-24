@@ -14,6 +14,9 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
   runtimeConfig: {
+    public: {
+      SERVER_URL: process.env.SERVER_URL,
+    },
     oauth: {
       google: {
         clientId: process.env.GOOGLE_CLIENT_ID,
