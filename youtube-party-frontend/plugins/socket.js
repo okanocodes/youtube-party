@@ -1,7 +1,7 @@
 import { defineNuxtPlugin } from "#app";
 import { io } from "socket.io-client";
 
-const config = useRuntimeConfig();
+// const config = useRuntimeConfig();
 
 export default defineNuxtPlugin((nuxtApp) => {
   // Ensure we only initialize the WebSocket client on the client-side
@@ -9,7 +9,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     // if production, use the environment variable SERVER_URL, otherwise use localhost
     const socketUrl =
       process.env.NODE_ENV === "production"
-        ? config.public.SERVER_URL
+        ? process.env.SERVER_URL
         : "http://localhost:3001";
 
     const socket = io(socketUrl, {
