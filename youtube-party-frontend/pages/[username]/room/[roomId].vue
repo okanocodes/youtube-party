@@ -18,6 +18,7 @@ const users = ref([]);
 const videoUrl = ref('');
 const connectionStatus = ref('connecting');
 const syncStatus = ref('synced');
+const fullPageUrl = ref(`https://youtube-party.vercel.app/${route.params.username}/room/${roomId}`);
 
 // Player state
 let player = null;
@@ -50,6 +51,11 @@ function extractVideoId(url) {
     if (match) return match[1];
   }
   return null;
+}
+
+function copyLink() {
+  navigator.clipboard.writeText(fullPageUrl.value)
+  alert('Room link copied!')
 }
 
 function showError(message, duration = 5000, redirect = false) {
@@ -520,6 +526,8 @@ useHead({
       </div>
     </div>
 
+
+
     <!-- Loading State -->
     <div v-if="loading" class="loading">
       <div class="spinner"></div>
@@ -545,6 +553,16 @@ useHead({
 
     <!-- Main Party Interface -->
     <div v-else-if="joined" class="main-content">
+
+      <!-- Room Link -->
+      <div class="mb-4">
+        <label class="block font-medium">🔗 Share this room link:</label>
+        <div class="flex items-center gap-2 mt-1">
+          <input :value="fullPageUrl" readonly class="border px-2 py-1 flex-1 text-lg" />
+          <button @click="copyLink" class="bg-gray-200 px-2 py-2 rounded cursor-pointer"><span
+              class="mr-1 hidden md:inline-block">📋</span> Copy</button>
+        </div>
+      </div>
       <!-- Host Controls -->
       <div v-if="isHost" class="host-controls bg-4/50 border-2">
         <h3 class="text-xl font-semibold">🎬 Host Controls</h3>
@@ -558,6 +576,8 @@ useHead({
             </button>
           </div>
         </div>
+
+
 
         <div class="playback-controls">
           <button @click="playVideo" :disabled="!playerReady" class="control-btn play">

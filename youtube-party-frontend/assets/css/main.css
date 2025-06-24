@@ -14,9 +14,9 @@ body {
 }
 
 input {
-    outline-color: var(--color-2);
+    outline-color: var(--color-1);
     outline-offset: calc(1px * -1);
-    outline-style: var(--tw-outline-style);
+    outline-style: solid;
     outline-width: 1px;
     padding-block: .375rem;
     padding-inline: .75rem;
@@ -25,5 +25,6 @@ input {
 }
 
 input:focus {
-    outline-color: var(--color-1);
+    outline-color: white;
+    color: white
 }

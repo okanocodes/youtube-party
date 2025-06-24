@@ -42,7 +42,7 @@ onUnmounted(() => {
 
 <template>
 
-  <div class="flex gap-4 w-full justify-center">
+  <div class="flex flex-col md:flex-row gap-4 w-full justify-center">
     <div class="flex flex-col gap-5 justify-between">
 
       <div class="text-4xl font-bold text-gray-900 tracking-tight">
