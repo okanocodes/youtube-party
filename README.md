@@ -4,6 +4,14 @@ A web application for watching YouTube videos together in real-time. Built with 
 
 ---
 
+## Features
+
+- Create and join rooms to watch YouTube videos together
+- Real-time synchronization
+- Host controls for managing the room and playlist
+
+---
+
 ## Project Structure
 
 ```
@@ -98,14 +106,6 @@ pnpm preview
 
 - Frontend: Copy `.env.example` to `.env` and configure as needed.
 - Backend: Add any required environment variables to `youtube-party-backend/.env` if needed.
-
----
-
-## Features
-
-- Create and join rooms to watch YouTube videos together
-- Real-time synchronization
-- Host controls for managing the room and playlist
 
 ---
 
