@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@theme {
+    --color-1: #030637;
+    --color-2: #3c0753;
+    --color-3: #720455;
+    --color-4: #910a67;
+}
+
+body {
+    background-color: var(--color-1);
+    color: var(--color-2);
+    min-height: 100vh;
+}
+
+input {
+    outline-color: var(--color-2);
+    outline-offset: calc(1px * -1);
+    outline-style: var(--tw-outline-style);
+    outline-width: 1px;
+    padding-block: .375rem;
+    padding-inline: .75rem;
+    border-radius: .375rem;
+    color: var(--color-1)
+}
+
+input:focus {
+    outline-color: var(--color-1);
+}
