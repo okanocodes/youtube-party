@@ -15,7 +15,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      SERVER_URL: process.env.SERVER_URL,
+      SERVER_URL: process.env.NUXT_PUBLIC_SERVER_URL,
     },
     oauth: {
       google: {
