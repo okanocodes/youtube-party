@@ -18,7 +18,7 @@ const users = ref([]);
 const videoUrl = ref('');
 const connectionStatus = ref('connecting');
 const syncStatus = ref('synced');
-const fullPageUrl = ref(`https://youtube-party.vercel.app/${route.params.username}/room/${roomId}`);
+const fullPageUrl = ref(window.location.href);
 
 // Player state
 let player = null;
@@ -433,6 +433,8 @@ function setupSocketEvents() {
 // Lifecycle hooks
 onMounted(() => {
   // console.log("Component mounted at", new Date().toISOString());
+
+  console.log('route:', route);
   loadYouTubeAPI()
 
   if (import.meta.client) {
