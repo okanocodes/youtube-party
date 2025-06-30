@@ -123,14 +123,14 @@ pnpm preview
 
 ---
 
-## License
-
-MIT
-
----
-
 ## Acknowledgements
 
 - [Nuxt 3](https://nuxt.com/)
 - [Express](https://expressjs.com/)
 - [Socket.IO](https://socket.io/)
+
+---
+
+## License
+
+MIT
