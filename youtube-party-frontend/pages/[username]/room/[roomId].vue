@@ -18,7 +18,10 @@ const users = ref([]);
 const videoUrl = ref('');
 const connectionStatus = ref('connecting');
 const syncStatus = ref('synced');
-const fullPageUrl = ref(window.location.href);
+const fullPageUrl = ref('');
+if (import.meta.client) {
+  fullPageUrl.value = window.location.href;
+}
 
 // Player state
 let player = null;
