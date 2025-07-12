@@ -378,7 +378,12 @@ function setupSocketEvents() {
   });
 
   $socket.on('change-video', ({ videoId }) => {
-    if (player && playerReady.value) {
+    if (!player || !playerReady.value) {
+      // Player doesn't exist yet, create it
+      createPlayer(videoId);
+      currentVideoId.value = videoId;
+      showSyncStatus('loading');
+    } else {
       try {
         player.loadVideoById(videoId);
         currentVideoId.value = videoId;
