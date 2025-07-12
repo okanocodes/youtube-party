@@ -509,7 +509,7 @@ onUnmounted(() => {
 
 // Set page title
 const pageTitle = computed(() => {
-  return `${hostUsername.value}'s YouTube Party - Room ${roomId}`;
+  return `${hostUsername.value || route.params.username}'s YouTube Party - Room ${roomId}`;
 });
 
 useHead({
@@ -562,10 +562,11 @@ useHead({
       <!-- Room Link -->
       <div class="mb-4">
         <label class="block font-medium">🔗 Share this room link:</label>
-        <div class="flex items-center gap-2 mt-1">
+        <div class="flex flex-col md:flex-row items-center gap-2 mt-1 px-2 py-1">
           <input :value="fullPageUrl" readonly class="border px-2 py-1 flex-1 text-lg" />
-          <button @click="copyLink" class="bg-gray-200 px-2 py-2 rounded cursor-pointer"><span
-              class="mr-1 hidden md:inline-block">📋</span> Copy</button>
+          <button @click="copyLink" class="bg-gray-200 px-2 py-2 rounded cursor-pointer w-full md:w-auto"><span
+              class="mr-1">📋</span>
+            Copy</button>
         </div>
       </div>
       <!-- Host Controls -->
@@ -1121,6 +1122,55 @@ useHead({
 
   #player {
     height: 200px;
+
+  }
+}
+
+
+
+.party-page,
+.header,
+.main-content,
+.host-controls,
+.video-container,
+.users-section,
+.join-box {
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.input-group input,
+.input-group,
+.video-url-section input,
+#player {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Prevent horizontal overflow on mobile */
+@media (max-width: 768px) {
+
+  .party-page,
+  .header,
+  .main-content,
+  .host-controls,
+  .video-container,
+  .users-section,
+  .join-box {
+    width: auto;
+    max-width: 100vw;
+    box-sizing: border-box;
+  }
+
+  .input-group input,
+  .input-group,
+  .video-url-section input,
+  #player {
+    width: auto;
+    max-width: 100vw;
+    box-sizing: border-box;
   }
 }
 </style>

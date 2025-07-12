@@ -67,9 +67,10 @@ onUnmounted(() => {
     </div>
 
     <div v-if="loggedIn" class="flex flex-col space-y-5">
-      <input v-model="username" type="text" class="input max-w-sm" aria-label="input"
+      <input v-model="username" name="username" type="text" class="input max-w-sm" aria-label="input"
         placeholder="Enter your username" />
-      <input v-model="roomId" type="text" class="input max-w-sm" aria-label="input" placeholder="Enter room name" />
+      <input v-model="roomId" name="roomId" type="text" class="input max-w-sm" aria-label="input"
+        placeholder="Enter room name" />
       <button @click="createRoom"
         class="w-full flex flex-row items-center justify-center gap-5 rounded-md h-12 font-medium bg-white text-2 hover:text-1 border border-3 hover:bg-gray-50 hover:border-2 shadow-sm">Create
         Room</button>
