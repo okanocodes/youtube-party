@@ -94,7 +94,7 @@ onUnmounted(() => {
         placeholder="Enter room name" />
       <button @click="createRoom" :disabled="roomLoading"
         class="w-full flex flex-row items-center justify-center gap-5 rounded-md h-12 font-medium bg-white text-2 hover:text-1 border border-3 hover:bg-gray-50 hover:border-2 hover:cursor-pointer shadow-sm relative">
-        <span v-if="loading" class="absolute left-4">
+        <span v-if="roomLoading" class="absolute left-4">
           <!-- Simple spinner, you can use your own or a library spinner -->
           <svg class="animate-spin h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
             viewBox="0 0 24 24">
