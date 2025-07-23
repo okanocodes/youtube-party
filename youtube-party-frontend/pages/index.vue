@@ -6,15 +6,35 @@ const { loggedIn, user, session, fetch, clear, openInPopup } = useUserSession()
 
 const username = ref(''); // user input
 const roomId = ref('');
+const roomLoading = ref(false);
 const router = useRouter();
 const { $socket } = useNuxtApp();
 
+// Simple security check: only allow alphanumeric, dashes, and underscores, 3-20 chars
+function isValidInput(str) {
+  return /^[a-z0-9_-]{3,20}$/.test(str);
+}
 
 function createRoom() {
-  if (!username.value || !roomId.value) {
-    alert('Please enter both username and room ID');
+  // Trim and lowercase
+  const cleanUsername = username.value.trim().toLowerCase();
+  const cleanRoomId = roomId.value.trim().toLowerCase();
+
+  if (!cleanUsername || !cleanRoomId) {
+    alert('Please enter both username and room name');
     return;
   }
+
+  if (!isValidInput(cleanUsername) || !isValidInput(cleanRoomId)) {
+    alert('Only 3-20 lowercase letters, numbers, dashes, and underscores are allowed.');
+    return;
+  }
+
+  // Update refs so UI stays in sync
+  username.value = cleanUsername;
+  roomId.value = cleanRoomId;
+
+  roomLoading.value = true;
 
   // Tell backend to create the room with this user as host
   $socket.emit('create-room', {
@@ -27,6 +47,7 @@ onMounted(() => {
   // Listen for confirmation from backend that room is created & user is host
   $socket.on('host-confirmation', () => {
     // Navigate to room page as host
+    roomLoading.value = false;
     router.push(`/${username.value}/room/${roomId.value}`);
   });
 
@@ -71,9 +92,18 @@ onUnmounted(() => {
         placeholder="Enter your username" />
       <input v-model="roomId" name="roomId" type="text" class="input max-w-sm" aria-label="input"
         placeholder="Enter room name" />
-      <button @click="createRoom"
-        class="w-full flex flex-row items-center justify-center gap-5 rounded-md h-12 font-medium bg-white text-2 hover:text-1 border border-3 hover:bg-gray-50 hover:border-2 shadow-sm">Create
-        Room</button>
+      <button @click="createRoom" :disabled="roomLoading"
+        class="w-full flex flex-row items-center justify-center gap-5 rounded-md h-12 font-medium bg-white text-2 hover:text-1 border border-3 hover:bg-gray-50 hover:border-2 hover:cursor-pointer shadow-sm relative">
+        <span v-if="loading" class="absolute left-4">
+          <!-- Simple spinner, you can use your own or a library spinner -->
+          <svg class="animate-spin h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+            viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+          </svg>
+        </span>
+        <span :class="{ 'opacity-50': roomLoading }">Create Room</span>
+      </button>
     </div>
 
     <!-- <div v-if="loggedIn">
